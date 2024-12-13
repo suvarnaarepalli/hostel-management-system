@@ -43,10 +43,21 @@
         .icon {
             margin-right: 8px;
         }
+        .marquee {
+            background-color: #004d4d; /* Dark teal */
+            color: red;
+            padding: 10px 0;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 </head>
 <body style="background-image: url('images.jpeg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; margin: 0;"></body>
-    <center><h1><b>Welcome to Hostel Management</b></h1></center>
+   <!-- Marquee section -->
+<div class="marquee">
+    <marquee behavior="scroll" direction="right">Welcome to Hostel Management</marquee>
+</div>
     <div class="navbar">
         <a href="./addstudent.html" class="active">
             <span class="icon">🏠</span>Add Student
