@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Management Navbar</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #004d4d; /* Dark teal */
+            padding: 10px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #008080; /* Lighter teal */
+            color: #ffffff;
+        }
+
+        .navbar a.active {
+            background-color: #008080;
+            color: white;
+        }
+
+        .icon {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body style="background-image: url('images.jpeg'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh; margin: 0;"></body>
+    <center><h1><b>Welcome to Hostel Management</b></h1></center>
+    <div class="navbar">
+        <a href="./addstudent.html" class="active">
+            <span class="icon">🏠</span>Add Student
+        </a>
+        <a href="./visitor.html">
+            <span class="icon">👤</span>Visitor
+        </a>
+        <a href="./feemanage.html">
+            <span class="icon">💳</span>Fee Management
+        </a>
+        <a href="./roomallocation.html">
+            <span class="icon">🛏️</span>Room Allocation
+        </a>
+        <a href="./main.html">
+            <span class="icon">🔓</span>Logout
+        </a>
+        <a href="./studentinfo.html">
+            <span class="icon">🎓</span>Student Info
+        </a>
+    </div>
+
+</body>
+</html>

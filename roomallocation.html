@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Allocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .table-container, .filled-container {
+            width: 80%;
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            background-color: #008080;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #008080;
+            color: white;
+        }
+
+        .allocate-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .filled-container {
+            background-color: #e8f5e9;
+        }
+
+        .filled-room {
+            margin: 10px 0;
+        }
+
+        .filled-room p {
+            margin: 5px 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form-container input, .form-container select {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #008080;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h2>Rooms Available</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room No.</th>
+                    <th>Beds</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td id="room1">A1, A2, A3</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td id="room2">B1, B2, B3</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td id="room3">C1, C2, C3</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="allocate-container">
+            <button type="button" onclick="showForm()">Allocate Empty Bed</button>
+        </div>
+    </div>
+
+    <div class="form-container" id="allocationForm">
+        <h2>Allocate Bed</h2>
+        <form id="allocationFormDetails">
+            <input type="text" id="studentName" placeholder="Student Name" required><br>
+            <select id="roomNumber" onchange="updateBedOptions()" required>
+                <option value="">Select Room</option>
+                <option value="1">Room 1</option>
+                <option value="2">Room 2</option>
+                <option value="3">Room 3</option>
+            </select><br>
+            <select id="bedNumber" required>
+                <option value="">Select Bed</option>
+            </select><br>
+            <button type="button" onclick="submitAllocation()">Submit</button>
+        </form>
+    </div>
+
+    <div class="filled-container">
+        <h2>Filled Rooms</h2>
+        <div id="filled-rooms">
+            <!-- Filled rooms will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        let availableRooms = {
+            "1": ["A1", "A2", "A3"],
+            "2": ["B1", "B2", "B3"],
+            "3": ["C1", "C2", "C3"]
+        };
+
+        let filledRooms = {
+            "1": { beds: [], filled: 0, remaining: 3 },
+            "2": { beds: [], filled: 0, remaining: 3 },
+            "3": { beds: [], filled: 0, remaining: 3 }
+        };
+
+        function showForm() {
+            document.getElementById('allocationForm').style.display = 'block';
+        }
+
+        function updateBedOptions() {
+            const roomNumber = document.getElementById('roomNumber').value;
+            const bedNumberDropdown = document.getElementById('bedNumber');
+            bedNumberDropdown.innerHTML = '<option value="">Select Bed</option>';
+
+            if (roomNumber && availableRooms[roomNumber]) {
+                availableRooms[roomNumber].forEach(bed => {
+                    let option = document.createElement('option');
+                    option.value = bed;
+                    option.textContent = bed;
+                    bedNumberDropdown.appendChild(option);
+                });
+            }
+        }
+
+        function submitAllocation() {
+            let studentName = document.getElementById('studentName').value;
+            let roomNumber = document.getElementById('roomNumber').value;
+            let bedNumber = document.getElementById('bedNumber').value;
+
+            if (studentName && roomNumber && bedNumber) {
+                if (availableRooms[roomNumber].includes(bedNumber)) {
+                    let bedIndex = availableRooms[roomNumber].indexOf(bedNumber);
+                    availableRooms[roomNumber].splice(bedIndex, 1);
+
+                    filledRooms[roomNumber].beds.push(`${studentName} (${bedNumber})`);
+                    filledRooms[roomNumber].filled = filledRooms[roomNumber].beds.length;
+                    filledRooms[roomNumber].remaining = 3 - filledRooms[roomNumber].filled;
+
+                    updateRooms();
+
+                    alert(`${studentName} has been allocated to Room ${roomNumber}, Bed ${bedNumber}`);
+
+                    document.getElementById('allocationForm').reset();
+                    document.getElementById('allocationForm').style.display = 'none';
+                } else {
+                    alert("The selected bed is not available.");
+                }
+            } else {
+                alert('Please fill all the fields.');
+            }
+        }
+
+        function updateRooms() {
+            for (let room in availableRooms) {
+                document.getElementById('room' + room).textContent = availableRooms[room].join(', ') || 'No beds available';
+            }
+
+            const filledRoomsContainer = document.getElementById('filled-rooms');
+            filledRoomsContainer.innerHTML = '';
+            for (let room in filledRooms) {
+                let roomData = filledRooms[room];
+                let roomElement = document.createElement('div');
+                roomElement.classList.add('filled-room');
+                roomElement.innerHTML = `
+                    <p><strong>Room ${room}</strong> - Filled: ${roomData.filled} / 3</p>
+                    <p><strong>Remaining Beds:</strong> ${roomData.remaining}</p>
+                    <p><strong>Filled Beds:</strong> ${roomData.beds.join(', ')}</p>
+                `;
+                filledRoomsContainer.appendChild(roomElement);
+            }
+        }
+
+        updateRooms();
+    </script>
+</body>
+</html>

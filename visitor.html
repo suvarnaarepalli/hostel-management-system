@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #f2f2f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 700px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-section {
+            width: 48%;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+        .form-group-small input {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Visitor Details Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <label for="visitor-name">Name</label>
+                <input type="text" id="visitor-name" name="visitor-name" placeholder="Shailesh Godghase" required>
+            </div>
+
+            <div class="form-group">
+                <label for="visitor-contact">Contact</label>
+                <input type="text" id="visitor-contact" name="visitor-contact" placeholder="1234567890" required>
+            </div>
+
+            <div class="form-group">
+                <label for="visitor-reason">Reason</label>
+                <input type="text" id="visitor-reason" name="visitor-reason" placeholder="Meeting" required>
+            </div>
+
+            <div class="form-group">
+                <label for="visitor-address">Address</label>
+                <input type="text" id="visitor-address" name="visitor-address" placeholder="Maharashtra" required>
+            </div>
+        </div>
+
+        <!-- Student and Room Details Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <label for="student-name">Student Name</label>
+                <input type="text" id="student-name" name="student-name" placeholder="xyz abc" required>
+            </div>
+
+            <div class="form-group form-group-small">
+                <button type="button">Search</button>
+                <button type="button">Reset</button>
+            </div>
+
+            <div class="form-group">
+                <label for="room-number">Room No.</label>
+                <input type="text" id="room-number" name="room-number" placeholder="1" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Add Visitor</button>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message">
+                <button>Save</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
